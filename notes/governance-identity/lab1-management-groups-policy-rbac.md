@@ -1,9 +1,15 @@
-# 1️⃣ Create the Management Group Structure
-Task
+# LAB 1 — Governance Foundations  
+### *Management Groups, Azure Policy, RBAC*
 
-Create the following MG hierarchy:
-```bash
+---
 
+## 1️⃣ Create the Management Group Structure
+
+### **Task**
+
+Create the following Management Group (MG) hierarchy:
+
+```
 Tenant Root Group
 │
 ├── Platform
@@ -11,68 +17,80 @@ Tenant Root Group
     ├── Corp
     └── Online
 ```
-Steps
 
-    1. Go to Azure Portal → Management Groups
-   
-    2. Click Start using management groups if you haven't before
-   
-    3. Click Create
-   
-    4. Create the following MGs:
+---
 
-    Platform
-    LandingZones
-    Corp
-    Online
+### **Steps**
 
-    5. Drag & drop to build the hierarchy.
+1. Go to **Azure Portal → Management Groups**  
+2. Click **Start using management groups** if prompted  
+3. Click **Create**  
+4. Create these MGs:
+   - `Platform`
+   - `LandingZones`
+   - `Corp`
+   - `Online`
+5. Drag & drop to arrange them into the hierarchy above.
 
-Verification
-In the portal, the MG screen should show the structure above.
+---
 
-# 2️⃣ Assign an Azure Policy (Tag Enforcement)
+### **Verification**
 
-Ensure every resource must include a costCenter tag.
-Steps
+In the Management Groups view, the structure should look like the tree diagram.
 
-    1. Go to Azure Portal and then Policy
-   
-    2. Select Definitions
-   
-    3. Search for: “Require a tag and its value”
+---
 
-    4. Click Assign
-   
-    5. Choose scope: LandingZones MG
+## 2️⃣ Assign an Azure Policy (Tag Enforcement)
 
-    6. Set tag name: costCenter
+### **Goal**
 
-    7. Set tag value: required
+Ensure every resource must include a `costCenter` tag.
 
-    8. Review + Create
+---
 
-Verification
-Create any resource (VM, RG, Storage) without the tag.
-The deployment should fail with a policy error.
+### **Steps**
 
-# 3️⃣ Create a Custom RBAC Role
-Create a custom role that can read everything BUT only start/stop VMs.
+1. Go to **Azure Portal → Policy**  
+2. Select **Definitions**  
+3. Search for: **Require a tag and its value**  
+4. Click **Assign**  
+5. Choose scope: **LandingZones** Management Group  
+6. Set:
+   - Tag name: `costCenter`
+   - Tag value: `required`
+7. Click **Review + Create**
 
-Steps
+---
 
-    1. Go to Azure Portal → Subscriptions
-   
-    2. Select your subscription
-   
-    3. RBAC → Roles → + Create
-   
-    4. Choose Custom Role
+### **Verification**
 
-Define JSON permissions:
+Try deploying any resource *without the tag* (VM, Resource Group, Storage, etc.).
 
-```bash
+Deployment should **fail** with a policy violation.
 
+---
+
+## 3️⃣ Create a Custom RBAC Role
+
+### **Goal**
+
+Create a custom role that can read everything but can **only start/stop VMs**.
+
+---
+
+### **Steps**
+
+1. Go to **Azure Portal → Subscriptions**  
+2. Select your subscription  
+3. Open **Access Control (IAM)**  
+4. Go to **Roles → + Create**  
+5. Choose **Custom role**
+
+---
+
+### **Define the Role JSON**
+
+```json
 {
   "properties": {
     "roleName": "VM Operator Limited",
@@ -95,70 +113,85 @@ Define JSON permissions:
 }
 ```
 
-Verification
-Assign the role to yourself at a Resource Group level and confirm:
+---
 
-    You can start/stop VMs
-    You cannot delete VMs
-    You cannot create new resources
+### **Verification**
 
-# 4️⃣ Assign RBAC at Correct Scope
-Assign permissions using best practices.
+Assign the role to yourself at a **Resource Group** level.
 
-Scenario
-A developer needs to manage resources in Corp landing zone but NOT in Online.
+You should be able to:
 
-Steps
+✔ Start VMs  
+✔ Stop (deallocate) VMs  
+✘ Cannot delete VMs  
+✘ Cannot create new resources  
 
-    1. Go to Management Groups and then to Corp
-   
-    2. RBAC and then choose Add role assignment
-   
-    3. Select Contributor
-   
-    4. Assign to a test user or your second account.
+---
 
-Verification
+## 4️⃣ Assign RBAC at the Correct Scope
 
-User should:
+### **Scenario**
 
-    Deploy resources in the Corp subscription
-    Fail to deploy in Online
+A developer must manage resources *only* in the **Corp** landing zone, not in **Online**.
 
-# 5️⃣ Lab Summary
-You now practiced:
+---
 
-    Creating a Management Group hierarchy
-    Enforcing governance using Azure Policy
-    Designing a custom RBAC role
-    Assigning access at proper scopes
+### **Steps**
 
-These are the core governance skills tested on AZ-305.
+1. Go to **Management Groups → Corp**  
+2. Open **Access Control (IAM)**  
+3. Click **Add role assignment**  
+4. Select **Contributor**  
+5. Assign it to a test user (or secondary account)
 
-# 📚 References & Further Reading
+---
 
-## Azure Governance
-- **Azure Management Groups**  
-  https://learn.microsoft.com/azure/governance/management-groups/overview
-- **Azure Resource Manager (Resource Organization)**  
-  https://learn.microsoft.com/azure/azure-resource-manager/management/overview
-- **Azure Landing Zone Architecture (Enterprise-Scale)**  
+### **Verification**
+
+User should be able to:
+
+✔ Deploy resources in **Corp**  
+✘ Fail to deploy resources in **Online**
+
+---
+
+## 5️⃣ Lab Summary
+
+In this lab you practiced:
+
+- Creating a Management Group hierarchy  
+- Applying governance using Azure Policy  
+- Designing a custom RBAC role  
+- Assigning permissions using best-practice scoping  
+
+These are core skills tested heavily on **AZ-305**.
+
+---
+
+## 📚 References & Further Reading
+
+### **Azure Governance**
+- Management Groups  
+  https://learn.microsoft.com/azure/governance/management-groups/overview  
+- Resource Organization  
+  https://learn.microsoft.com/azure/azure-resource-manager/management/overview  
+- Landing Zone Architecture  
   https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/
 
-## Azure Policy
-- **Azure Policy Overview**  
-  https://learn.microsoft.com/azure/governance/policy/overview
-- **Policy Effects (Deny, Audit, Modify, DeployIfNotExists)**  
-  https://learn.microsoft.com/azure/governance/policy/concepts/effects
-- **Built-in Policy Definitions**  
+### **Azure Policy**
+- Policy Overview  
+  https://learn.microsoft.com/azure/governance/policy/overview  
+- Policy Effects  
+  https://learn.microsoft.com/azure/governance/policy/concepts/effects  
+- Built-in Policy Definitions  
   https://learn.microsoft.com/azure/governance/policy/samples/built-in-policies
 
-## Role-Based Access Control (RBAC)
-- **Azure RBAC Overview**  
-  https://learn.microsoft.com/azure/role-based-access-control/overview
-- **Built-in Roles**  
-  https://learn.microsoft.com/azure/role-based-access-control/built-in-roles
-- **Custom Roles**  
-  https://learn.microsoft.com/azure/role-based-access-control/custom-roles
-- **Assigning Roles**  
+### **RBAC**
+- RBAC Overview  
+  https://learn.microsoft.com/azure/role-based-access-control/overview  
+- Built-in Roles  
+  https://learn.microsoft.com/azure/role-based-access-control/built-in-roles  
+- Custom Roles  
+  https://learn.microsoft.com/azure/role-based-access-control/custom-roles  
+- Assigning Roles  
   https://learn.microsoft.com/azure/role-based-access-control/role-assignments-portal
