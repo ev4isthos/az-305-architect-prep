@@ -14,16 +14,19 @@ Tenant Root Group
 Steps
 
     1. Go to Azure Portal → Management Groups
+   
     2. Click Start using management groups if you haven't before
+   
     3. Click Create
+   
     4. Create the following MGs:
 
-        Platform
-        LandingZones
-        Corp
-        Online
+    Platform
+    LandingZones
+    Corp
+    Online
 
-    1. Drag & drop to build the hierarchy.
+    5. Drag & drop to build the hierarchy.
 
 Verification
 In the portal, the MG screen should show the structure above.
@@ -33,17 +36,20 @@ In the portal, the MG screen should show the structure above.
 Ensure every resource must include a costCenter tag.
 Steps
 
-    1. Go to Azure Portal → Policy
+    1. Go to Azure Portal and then Policy
+   
     2. Select Definitions
-    3. Search for:
-        “Require a tag and its value”
+   
+    3. Search for: “Require a tag and its value”
+
     4. Click Assign
-    5. Choose scope:
-        → LandingZones MG
-    6. Set tag name:
-        costCenter
-    7. Set tag value:
-        required
+   
+    5. Choose scope: LandingZones MG
+
+    6. Set tag name: costCenter
+
+    7. Set tag value: required
+
     8. Review + Create
 
 Verification
@@ -56,8 +62,11 @@ Create a custom role that can read everything BUT only start/stop VMs.
 Steps
 
     1. Go to Azure Portal → Subscriptions
+   
     2. Select your subscription
+   
     3. RBAC → Roles → + Create
+   
     4. Choose Custom Role
 
 Define JSON permissions:
@@ -101,8 +110,8 @@ A developer needs to manage resources in Corp landing zone but NOT in Online.
 
 Steps
 
-    Go to Management Groups → Corp
-    RBAC → Add role assignment
+    Go to Management Groups and then to Corp
+    RBAC and then choose Add role assignment
     Select Contributor
     Assign to a test user or your second account.
 
