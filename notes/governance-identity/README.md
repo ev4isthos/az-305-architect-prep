@@ -199,6 +199,8 @@ Key identity objects:
     Managed Identity
     App Registration
 
+Service Principal vs Managed Identity:
+
 | Feature                  | Service Principal | Managed Identity |
 |--------------------------|-------------------|------------------|
 | Requires secret/cert     | Yes               | No               |
@@ -277,8 +279,7 @@ Why identity governance matters:
     Meets compliance requirements
 
 
-🎯 Exam Scenarios to Master (These ALWAYS appear)
-
+## Exam Scenarios to Master
 Scenario 1
     “Ensure all resources have consistent tagging automatically.” → Use Azure Policy at MG level.
 
