@@ -38,13 +38,13 @@ This repository contains my complete preparation material for the **AZ-305 Solut
 
 ```bash
 
-$ tree -L 1
-.
-├── notes
-├── architecture-designs
-├── labs
-├── diagrams
-└── practice-questions
+az-305-preparation/
+│
+├── notes/
+├── architecture-designs/
+├── labs/
+├── diagrams/
+└── practice-questions/
 ```
 
 ---
