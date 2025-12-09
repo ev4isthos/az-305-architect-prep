@@ -1,38 +1,39 @@
-# 1. Azure Governance Overview
+# Azure Governance — General Notes (AZ-305)
 
-Azure governance ensures that cloud environments are:
-    Secure
-    Compliant
-    Organized
-    Cost-controlled
-    Consistent across all workloads
+Azure governance ensures that cloud environments remain:
+
+- Secure  
+- Compliant  
+- Organized  
+- Cost-controlled  
+- Consistent across all workloads  
 
 It is the foundation for enterprise-scale Azure architecture.
 
 Governance includes:
 
-    Management Groups
-    Subscriptions
-    Azure Policy
-    RBAC
-    Landing Zones
-    Resource Organization (RGs, tags)
+- Management Groups (MGs)  
+- Subscriptions  
+- Azure Policy  
+- RBAC  
+- Landing Zones  
+- Resource Organization (RGs, tags)
 
-## 2. Management Groups (MGs)
+---
 
-Purpose:
+# 1. Management Groups (MGs)
+
+## 📌 Purpose
 Provide a hierarchy above subscriptions to organize and apply governance at scale.
 
-Key facts:
+## ✅ Key Facts
+- MG hierarchy supports up to **6 levels** (excluding root).  
+- **Policies and RBAC inherit downward** through the hierarchy.  
+- A subscription can belong to **only one** management group.  
+- Useful for security boundaries, environment separation, billing segmentation, and compliance.
 
-    MG hierarchy can be up to 6 levels deep (excluding root).
-    Policies and RBAC inherit downward.
-    Subscriptions can belong to only one management group.
-    Used for security boundaries, environment separation, billing, and compliance.
-    Typical Enterprise MG Hierarchy:
-
-```bash
-
+## 🏗 Typical Enterprise MG Hierarchy
+```
 Tenant Root Group
 │
 ├── Platform
@@ -40,257 +41,260 @@ Tenant Root Group
 │   ├── Management
 │   └── Connectivity
 │
-├── Landing Zones
+├── LandingZones
 │   ├── Corp
 │   └── Online
 │
 └── Sandbox
 ```
-Exam tips:
 
-    Apply policies at management group for consistency.
-    Separate platform vs landing zones.
-    Sandbox should be isolated with restrictive budgets.
+## 💡 Exam Tips
+- Always apply **Azure Policy** at the **MG level** when possible.  
+- Separate **Platform** (shared services) from **Landing Zones** (workloads).  
+- Sandbox should be isolated and limited with budgets & policy restrictions.
 
-## 3. Subscriptions
+---
 
-Subscriptions are billing boundaries and sometimes isolation boundaries.
+# 2. Subscriptions
 
-When to use multiple subscriptions:
+## 📌 Purpose
+A subscription is a **billing boundary**, but also often an **isolation boundary**.
 
-    Separation of environments (Prod / Dev)
-    Separation of departments or cost centers
-    Scalability or resource limits
-    Security or blast radius isolation
+## 🧭 When to use multiple subscriptions
+- Environment separation (**Prod / Dev / Test**)  
+- Business units or cost centers  
+- Scaling limits (Storage accounts, VNets, etc.)  
+- Blast radius or security isolation  
 
-Subscription design best practices:
+## 🧩 Subscription Design Best Practices
+- Use naming conventions (`corp-prod-sub`, `corp-dev-sub`)  
+- Use Azure Policy to enforce governance  
+- Automate subscription creation (“subscription vending”) using:
+  - Bicep / ARM templates  
+  - Azure Landing Zone automation  
 
-    Use naming standards
-    Use Azure Policy to enforce configurations
-    Automate subscription creation (subscription vending) using:
-    ARM/Bicep templates
-    Azure Landing Zone automations
+---
 
-## 4. Azure Policy
+# 3. Azure Policy
 
 Azure Policy enforces:
 
-    Allowed configurations
-    Compliance requirements
-    Security baselines
-    Tagging standards
-    Resource restrictions
+- Allowed configurations  
+- Compliance requirements  
+- Security baselines  
+- Tagging requirements  
+- Resource restrictions  
 
-Key components:
+## 🔧 Components
+- **Policy Definition** → what to enforce  
+- **Initiative (Policy Set)** → bundle of policies  
+- **Assignment** → apply policy at MG / subscription / RG  
 
-    Policy Definition → what you want to enforce
-    Initiative (Policy Set) → bundle of multiple policies
-    Assignment → apply definition/initiative to MG / subscription / RG
+## ⚡ Policy Effects
+- `Deny`  
+- `Audit`  
+- `Modify`  
+- `DeployIfNotExists` *(very important for AZ-305)*
 
-Effects:
+## 🧠 Examples Relevant to AZ-305
+- Allow only specific VM SKUs  
+- Restrict regions based on compliance  
+- Enforce resource naming conventions  
+- Apply mandatory tags (env, costCenter)  
+- Enforce diagnostics settings automatically  
 
-    Deny
-    Audit
-    Modify
-    DeployIfNotExists (very important for exam)
+## 💡 Exam Tips
+- **Policy = enforcement**, **RBAC = permission** → do not confuse.  
+- Policy inheritance = RBAC inheritance.  
+- `DeployIfNotExists` used for **security baselines** (e.g., enable logging).  
 
-Examples for AZ-305:
+---
 
-    Allow only specific VM SKUs
-    Enforce resource location
-    Enforce specific naming convention
-    Enforce tags (env, costCenter)
-    Deploy default diagnostics settings
+# 4. Role-Based Access Control (RBAC)
 
-Exam tips:
+RBAC controls **who** can do **what** on **which** resource.
 
-    Policy = enforcement, RBAC = permissions.
-    Policy assignments inherit downward, just like RBAC.
-    Use DeployIfNotExists for security baseline configurations.
+## 🔝 Scope Levels
+1. Management Group  
+2. Subscription  
+3. Resource Group  
+4. Resource  
 
-## 5. Role-Based Access Control (RBAC)
+**Permissions always inherit downward.**
 
-    RBAC controls WHO can do WHAT on WHICH resource.
+## 👤 RBAC Object Types
+- Users  
+- Groups *(best practice)*  
+- Service Principals  
+- Managed Identities  
 
-Scope levels:
+## 🏗 Common Built-In Roles
+- Reader  
+- Contributor  
+- Owner *(avoid)*  
+- User Access Administrator  
 
-    Management Group
-    Subscription
-    Resource Group
-    Individual Resource
-    Permissions always inherit downward.
+## 🔧 Custom Roles
+- JSON-based  
+- Used when built-in roles are too broad  
 
-RBAC object types:
+## 💡 Exam Tips
+- Assign RBAC at the **highest appropriate scope**.  
+- Avoid assigning **Owner** unnecessarily.  
+- Prefer **Managed Identities** over service principals with secrets.  
 
-    Users
-    Groups (best practice for assignment)
-    Service Principals
-    Managed Identities
-    Common built-in roles:
-    Reader
-    Contributor
-    Owner (avoid assigning)
-    User Access Administrator
+---
 
-Custom roles:
+# 5. Azure Landing Zones
 
-    Define if built-in roles are too broad.
-    JSON-based.
+Landing Zones are enterprise-scale architecture frameworks that define **how to structure Azure at scale**.
 
-Exam tips:
+They replace Blueprints and follow Cloud Adoption Framework best practices.
 
-    Assign RBAC at highest appropriate scope.
-    Avoid giving Owner privileges.
-    Use Managed Identities instead of service principal secrets.
+## 🧱 Core Pillars
+- Identity & access  
+- Network topology & connectivity  
+- Management & monitoring  
+- Security & compliance  
+- Cost management  
+- Application Dev & DevOps  
 
-## 6. Azure Landing Zones
+## 🧩 Types of Landing Zones
+- **Platform Landing Zone:** shared identity, network, management  
+- **Application Landing Zone:** workloads or departments  
 
-Landing Zones = enterprise-scale architecture frameworks for Azure.
-Modern replacement for Azure Blueprints.
+## 🎯 Benefits
+- Standardized resource organization  
+- Automated governance  
+- Predefined security baselines  
+- Consistent deployments across teams  
 
-Core pillars:
+## 💡 Exam Tips
+- Use Landing Zones for **multi-team** or **multi-subscription** environments.  
+- Governance must be enforced **before** workload deployment.  
+- Structure Landing Zones using **Management Groups**.  
 
-    Identity & Access Management
-    Network topology & connectivity
-    Management & monitoring
-    Security & compliance
-    Cost management
-    App Dev & DevOps
+---
 
-Types of landing zones:
+# 6. Azure Identity Overview
 
-    Platform Landing Zone → identity, networking, secure foundations
-    Application Landing Zone → departments, workloads
+Azure Identity includes:
 
-Landing Zone benefits:
+- Azure AD (Entra ID)  
+- Users & groups  
+- App registrations  
+- Service principals  
+- Managed identities  
+- Conditional Access  
+- Hybrid identity  
 
-    Standardized resource organization
-    Automated governance
-    Consistent security baselines
-    Ready for scaling across teams
+---
 
-Exam tips:
+# 7. Azure Active Directory (Entra ID)
 
-    Use landing zones for multi-subscription, multi-team envs.
-    Governance and policies must be enforced before workloads are deployed.
-    Use management groups to structure landing zones.
+## 🔑 Key Objects
+- Users  
+- Groups  
+- Service Principals  
+- Managed Identities  
+- App Registrations  
 
-# 7. Azure Identity Overview
-
-Azure Identity = authentication + authorization + identity lifecycle.
-
-It includes:
-
-    Azure AD (Entra ID)
-    Users & groups
-    App Registrations
-    Service principals
-    Managed identities
-    Conditional Access
-    Hybrid Identity
-
-## 8. Azure Active Directory (Entra ID)
-Core identity service for Azure.
-Key identity objects:
-
-    User
-    Group
-    Service Principal
-    Managed Identity
-    App Registration
-
-Service Principal vs Managed Identity:
+## 🆚 Service Principal vs Managed Identity
 
 | Feature                  | Service Principal | Managed Identity |
 |--------------------------|-------------------|------------------|
 | Requires secret/cert     | Yes               | No               |
-| Auto-rotated credentials | No                | Yes              |
-| Best use                 | External apps     | Azure resources  |
+| Auto-rotated creds       | No                | Yes              |
+| Best use case            | External apps     | Azure resources  |
 
-## 9. Authentication & Authorization
+---
 
-Authentication:
+# 8. Authentication & Authorization
 
-    OAuth 2.0
-    OpenID Connect
-    MSAL libraries
+## 🔐 Authentication
+- OAuth 2.0  
+- OpenID Connect  
+- MSAL Libraries  
 
-Authorization:
+## 🛡 Authorization
+- RBAC for Azure resources  
+- App roles for application security  
 
-    RBAC for Azure resources
-    App roles for application permissions
+---
 
-## 10. Conditional Access
+# 9. Conditional Access (CA)
 
-Core to Zero Trust in Azure.
+Core to Zero Trust.
+
 Used to enforce:
 
-    MFA
-    Device compliance
-    Location requirements
-    Risk-based controls
+- MFA  
+- Device compliance  
+- Location restrictions  
+- Risk-based controls  
 
-CA building blocks:
+## 🧱 CA Building Blocks
+- Conditions  
+- Grant controls  
+- Policies  
 
-    Conditions
-    Access controls
-    Policies
+## 📝 Examples
+- Require MFA outside trusted locations  
+- Block legacy authentication  
+- Require compliant device for sensitive apps  
 
-Examples:
+---
 
-    Require MFA for users outside trusted locations
-    Block legacy authentication
-    Require compliant devices for sensitive apps
-
-## 11. Hybrid Identity
+# 10. Hybrid Identity
 
 Used when on-prem Active Directory still exists.
-Components:
 
-    Azure AD Connect Sync
-    Password Hash Sync (PHS)
-    Pass-through Authentication (PTA)
-    Federation (AD FS)
+## 🔧 Components
+- Azure AD Connect Sync  
+- **Password Hash Sync (PHS)**  
+- **Pass-through Authentication (PTA)**  
+- **Federation (ADFS)**  
 
-When to use which:
+## ✔ When to use which
+- **PHS** → simplest, recommended  
+- **PTA** → password hashes must remain on-prem  
+- **Federation** → smartcards, legacy apps, strict compliance  
 
-    PHS → simplest, recommended
-    PTA → if password hashes cannot sync
-    Federation → only for highly regulated or legacy auth requirements
+## 💡 Exam Tips
+- Prefer **cloud-first identity** unless unavoidable.  
+- Avoid ADFS unless scenario demands it.  
 
-Exam tips:
+---
 
-    Prefer cloud-first identity unless requirements prevent it.
-    Federation increases complexity — avoid in new designs.
-
-## 12. Identity Governance (advanced)
+# 11. Identity Governance (Advanced)
 
 Includes:
+- Privileged Identity Management (PIM)  
+- Access Reviews  
+- Entitlement Management  
 
-    Privileged Identity Management (PIM)
-    Access reviews
-    Entitlement management
+Why it matters:
+- Prevents privilege creep  
+- Supports least privilege  
+- Enables just-in-time access  
+- Supports compliance frameworks  
 
-Why identity governance matters:
+---
 
-    Reduces privilege creep
-    Just-in-time access
-    Enforces least privilege
-    Meets compliance requirements
+# Exam Scenarios to Master
 
+1. **“Ensure all resources have consistent tagging automatically.”**  
+   → Use **Azure Policy** at MG level.
 
-## Exam Scenarios to Master
-    Scenario 1
-    “Ensure all resources have consistent tagging automatically.” → Use Azure Policy at MG level.
+2. **“Developers should deploy resources but cannot modify production.”**  
+   → Use **RBAC** (Contributor on Dev subscription).
 
-    Scenario 2
-    “Developers should deploy resources but cannot modify production.” → Use RBAC with Contributor role at Dev subscription.
+3. **“Ensure new subscriptions follow security baseline automatically.”**  
+   → Use **Landing Zones + Policy Initiatives**.
 
-    Scenario 3
-    “Ensure all new subscriptions follow security baseline automatically.” → Use Landing Zones + Policy initiatives at MG level.
+4. **“Application needs to access Key Vault without storing secrets.”**  
+   → Use **Managed Identity**.
 
-    Scenario 4
-    “Application needs to access Key Vault without storing secrets.” → Use Managed Identity.
+5. **“Ensure MFA for risky sign-ins.”**  
+   → Use **Conditional Access + Identity Protection**.
 
-    Scenario 5
-    “Ensure MFA for risky sign-ins.” → Use Conditional Access.
