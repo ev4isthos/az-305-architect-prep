@@ -110,10 +110,13 @@ A developer needs to manage resources in Corp landing zone but NOT in Online.
 
 Steps
 
-    Go to Management Groups and then to Corp
-    RBAC and then choose Add role assignment
-    Select Contributor
-    Assign to a test user or your second account.
+    1. Go to Management Groups and then to Corp
+   
+    2. RBAC and then choose Add role assignment
+   
+    3. Select Contributor
+ 1. 
+    4. Assign to a test user or your second account.
 
 Verification
 
