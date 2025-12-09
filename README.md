@@ -35,13 +35,17 @@ This repository contains my complete preparation material for the **AZ-305 Solut
 ---
 
 ## 📂 Repository Structure
-az-305-preparation/
-│
-├── notes/
-├── architecture-designs/
-├── labs/
-├── diagrams/
-└── practice-questions/
+
+```bash
+
+$ tree -L 1
+.
+├── notes
+├── architecture-designs
+├── labs
+├── diagrams
+└── practice-questions
+
 
 ---
 
