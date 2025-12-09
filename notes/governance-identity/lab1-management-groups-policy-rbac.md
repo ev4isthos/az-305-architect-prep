@@ -134,3 +134,26 @@ You now practiced:
     Assigning access at proper scopes
 
 These are the core governance skills tested on AZ-305.
+
+# 📚 References & Further Reading
+Azure Governance
+
+Azure Management Groups
+https://learn.microsoft.com/azure/governance/management-groups/overview
+
+Azure Resource Manager (Resource Organization)
+https://learn.microsoft.com/azure/azure-resource-manager/management/overview
+
+Azure Landing Zone Architecture (Enterprise-Scale)
+https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/
+
+Azure Policy
+
+Azure Policy Overview
+https://learn.microsoft.com/azure/governance/policy/overview
+
+Policy Effects (Deny, Audit, Modify, DeployIfNotExists)
+https://learn.microsoft.com/azure/governance/policy/concepts/effects
+
+Built-in Policy Definitions
+https://learn.microsoft.com/azure/governance/policy/samples/built-in-policies
