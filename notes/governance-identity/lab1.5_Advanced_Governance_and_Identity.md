@@ -254,6 +254,104 @@ You now fully cover Unit 1 of AZ-305: **Governance and Identity.**
 
 ---
 
+# 📚 References & Further Reading (LAB 1.5)
+
+## 🔷 Hybrid Identity
+- **Hybrid Identity Overview**  
+  https://learn.microsoft.com/azure/active-directory/hybrid/whatis-hybrid-identity  
+- **Azure AD Connect: Authentication Methods**  
+  https://learn.microsoft.com/azure/active-directory/hybrid/how-to-connect-authentication  
+- **Password Hash Synchronization (PHS)**  
+  https://learn.microsoft.com/azure/active-directory/hybrid/how-to-connect-password-hash-synchronization  
+- **Pass-through Authentication (PTA)**  
+  https://learn.microsoft.com/azure/active-directory/hybrid/how-to-connect-pta  
+- **Federation with AD FS**  
+  https://learn.microsoft.com/azure/active-directory/hybrid/how-to-connect-fed-whatis  
+- **Hybrid Identity Design Considerations (CAF)**  
+  https://learn.microsoft.com/azure/cloud-adoption-framework/ready/identity/hybrid-identity
+
+---
+
+## 🔷 Conditional Access
+- **Conditional Access Overview**  
+  https://learn.microsoft.com/azure/active-directory/conditional-access/overview  
+- **Conditional Access Best Practices**  
+  https://learn.microsoft.com/azure/active-directory/conditional-access/best-practices  
+- **Named Locations & MFA Requirements**  
+  https://learn.microsoft.com/azure/active-directory/conditional-access/howto-conditional-access-policy-location  
+- **Blocking Legacy Authentication**  
+  https://learn.microsoft.com/azure/active-directory/conditional-access/block-legacy-authentication  
+
+---
+
+## 🔷 Identity Protection
+- **Azure AD Identity Protection Overview**  
+  https://learn.microsoft.com/azure/active-directory/identity-protection/overview-identity-protection  
+- **User Risk Policy**  
+  https://learn.microsoft.com/azure/active-directory/identity-protection/howto-identity-protection-configure-user-risk-policy  
+- **Sign-in Risk Policy**  
+  https://learn.microsoft.com/azure/active-directory/identity-protection/howto-identity-protection-configure-sign-in-risk-policy  
+- **Risk Detection Types**  
+  https://learn.microsoft.com/azure/active-directory/identity-protection/overview  
+- **Identity Secure Score**  
+  https://learn.microsoft.com/azure/active-directory/reports-monitoring/concept-identity-secure-score  
+
+---
+
+## 🔷 Privileged Identity Management (PIM)
+- **PIM Overview**  
+  https://learn.microsoft.com/azure/active-directory/privileged-identity-management/pim-configure  
+- **Just-in-Time Access (JIT)**  
+  https://learn.microsoft.com/azure/active-directory/privileged-identity-management/pim-resource-roles-activate-your-roles  
+- **Approval Workflows**  
+  https://learn.microsoft.com/azure/active-directory/privileged-identity-management/pim-how-to-approve-activation  
+- **Privileged Access Strategy (CAF)**  
+  https://learn.microsoft.com/azure/cloud-adoption-framework/ready/identity/privileged-access  
+
+---
+
+## 🔷 Zero Trust Architecture
+- **Zero Trust Principles**  
+  https://learn.microsoft.com/security/zero-trust/zero-trust-overview  
+- **Zero Trust Identity Pillar**  
+  https://learn.microsoft.com/security/zero-trust/identity  
+- **Zero Trust Network Pillar**  
+  https://learn.microsoft.com/security/zero-trust/network  
+- **Zero Trust Access Control**  
+  https://learn.microsoft.com/security/zero-trust/deploy/identity  
+- **Zero Trust Deployment for Azure**  
+  https://learn.microsoft.com/security/zero-trust/azure/azure-zero-trust  
+
+---
+
+## 🔷 Governance & Landing Zones
+- **Azure Policy Overview**  
+  https://learn.microsoft.com/azure/governance/policy/overview  
+- **Policy Initiatives (Policy Sets)**  
+  https://learn.microsoft.com/azure/governance/policy/concepts/initiative-definition  
+- **Policy Effects (Deny, Audit, Append, etc.)**  
+  https://learn.microsoft.com/azure/governance/policy/concepts/effects  
+- **Azure Landing Zone Architecture**  
+  https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/  
+- **Management Group Best Practices**  
+  https://learn.microsoft.com/azure/governance/management-groups/best-practices  
+- **Resource Organization in Azure**  
+  https://learn.microsoft.com/azure/azure-resource-manager/management/overview
+
+---
+
+## 🔷 CAF (Cloud Adoption Framework) – Identity & Governance
+- **CAF Governance Overview**  
+  https://learn.microsoft.com/azure/cloud-adoption-framework/govern/  
+- **Identity Baseline (CAF)**  
+  https://learn.microsoft.com/azure/cloud-adoption-framework/ready/identity/  
+- **Governance Discipline: Resource Consistency**  
+  https://learn.microsoft.com/azure/cloud-adoption-framework/govern/resource-consistency  
+- **Governance Discipline: Security Baseline**  
+  https://learn.microsoft.com/azure/cloud-adoption-framework/govern/security-baseline  
+
+---
+
 # 🎯 Next Step
 Proceed to:
 
