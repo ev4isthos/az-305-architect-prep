@@ -2,7 +2,7 @@
 Task
 
 Create the following MG hierarchy:
-´´´bash
+```bash
 
 Tenant Root Group
 │
@@ -10,7 +10,7 @@ Tenant Root Group
 └── LandingZones
     ├── Corp
     └── Online
-´´´
+```
 Steps
 
     1. Go to Azure Portal → Management Groups
@@ -29,10 +29,8 @@ Verification
 In the portal, the MG screen should show the structure above.
 
 # 2️⃣ Assign an Azure Policy (Tag Enforcement)
-Goal
 
 Ensure every resource must include a costCenter tag.
-
 Steps
 
     1. Go to Azure Portal → Policy
@@ -49,13 +47,10 @@ Steps
     8. Review + Create
 
 Verification
-
 Create any resource (VM, RG, Storage) without the tag.
 The deployment should fail with a policy error.
 
 # 3️⃣ Create a Custom RBAC Role
-Goal
-
 Create a custom role that can read everything BUT only start/stop VMs.
 
 Steps
@@ -67,7 +62,7 @@ Steps
 
 Define JSON permissions:
 
-´´´bash
+```bash
 
 {
   "properties": {
@@ -89,7 +84,8 @@ Define JSON permissions:
     ]
   }
 }
-´´´
+```
+
 Verification
 Assign the role to yourself at a Resource Group level and confirm:
 
@@ -98,7 +94,6 @@ Assign the role to yourself at a Resource Group level and confirm:
     You cannot create new resources
 
 # 4️⃣ Assign RBAC at Correct Scope
-Goal
 Assign permissions using best practices.
 
 Scenario
