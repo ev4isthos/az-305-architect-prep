@@ -35,3 +35,39 @@ This repository contains my complete preparation material for the **AZ-305 Solut
 ---
 
 ## 📂 Repository Structure
+az-305-preparation/
+│
+├── notes/
+├── architecture-designs/
+├── labs/
+├── diagrams/
+└── practice-questions/
+
+---
+
+## 🎯 Exam Skills Covered
+- Design governance and compute/monitoring solutions  
+- Design storage, data integration, and protection solutions  
+- Design networking, security, business continuity  
+- Evaluate Azure services for optimal architectures  
+
+---
+
+## 🚀 How to Use This Repo
+1. Start with the `notes/` folder to review theory.  
+2. Move to `labs/` to practice hands-on.  
+3. Use `architecture-designs/` for scenario-based learning.  
+4. Review diagrams and summaries before the exam.  
+
+---
+
+## 📚 Recommended Official Resources
+- Microsoft Learn AZ-305 learning path  
+- Azure Architecture Center  
+- Well-Architected Framework  
+- Exam Sandbox and sample questions  
+
+---
+
+## ✨ Goal
+Build a repeatable, clearly organized knowledge base for mastering **Azure solution design** and passing **AZ-305** with confidence.
