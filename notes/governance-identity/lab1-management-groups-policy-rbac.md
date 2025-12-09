@@ -115,7 +115,7 @@ Steps
     2. RBAC and then choose Add role assignment
    
     3. Select Contributor
- 1. 
+   
     4. Assign to a test user or your second account.
 
 Verification
