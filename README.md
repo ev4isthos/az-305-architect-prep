@@ -38,7 +38,7 @@ This repository contains my complete preparation material for the **AZ-305 Solut
 
 ```bash
 
-az-305-preparation/
+az-305-architect-prep/
 │
 ├── notes/
 ├── architecture-designs/
