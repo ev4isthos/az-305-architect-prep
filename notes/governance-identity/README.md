@@ -281,16 +281,16 @@ Why identity governance matters:
 
 ## Exam Scenarios to Master
     Scenario 1
-        “Ensure all resources have consistent tagging automatically.” → Use Azure Policy at MG level.
+    “Ensure all resources have consistent tagging automatically.” → Use Azure Policy at MG level.
 
     Scenario 2
-        “Developers should deploy resources but cannot modify production.” → Use RBAC with Contributor role at Dev subscription.
+    “Developers should deploy resources but cannot modify production.” → Use RBAC with Contributor role at Dev subscription.
 
     Scenario 3
-        “Ensure all new subscriptions follow security baseline automatically.” → Use Landing Zones + Policy initiatives at MG level.
+    “Ensure all new subscriptions follow security baseline automatically.” → Use Landing Zones + Policy initiatives at MG level.
 
     Scenario 4
-        “Application needs to access Key Vault without storing secrets.” → Use Managed Identity.
+    “Application needs to access Key Vault without storing secrets.” → Use Managed Identity.
 
     Scenario 5
-        “Ensure MFA for risky sign-ins.” → Use Conditional Access.
+    “Ensure MFA for risky sign-ins.” → Use Conditional Access.
