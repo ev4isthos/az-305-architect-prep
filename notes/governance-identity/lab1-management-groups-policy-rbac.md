@@ -1,4 +1,4 @@
-# LAB 1 — Governance Foundations  
+# AZ-305 — LAB 1 — Governance Foundations  
 ### *Management Groups, Azure Policy, RBAC*
 
 ---
@@ -122,7 +122,7 @@ Assign the role to yourself at a **Resource Group** level.
 You should be able to:
 
 ✔ Start VMs  
-✔ Stop (deallocate) VMs  
+✔ Stop (deallocate) VMs  AZ-305 — 
 ✘ Cannot delete VMs  
 ✘ Cannot create new resources  
 
